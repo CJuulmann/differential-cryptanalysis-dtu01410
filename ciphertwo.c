@@ -7,8 +7,8 @@
 #include <stdio.h>
 #include <string.h>
 
-#define KSIZE 16	// key space of key parts
-#define CSIZE 16	// candidates for secret keys
+#define KSIZE 16	// key space of keyparts
+#define CSIZE 16	// candidates for secret keyparts 
 
 char bitXor(char x, char y);
 
@@ -28,7 +28,6 @@ char R[] = {0x4, 0x8, 0x6, 0xa, 0x1, 0x3, 0x0, 0x5, 0xc, 0xe, 0xd, 0xf, 0x2, 0xb
 int cand_cnt[CSIZE];
 
 int i, t;
-//char keyspace[KSIZE];
 char k0, k1, k2;
 
 int main(){
@@ -55,10 +54,10 @@ int main(){
 			} else{}
 		}
 	}		
-		printf("\nGuessing k2..\n");
-		for(i=0; i<CSIZE; i++){
-			printf("key: 0x%x\t count: %d\n", keyspace[i], cand_cnt[i]);
-		}
+	printf("\nGuessing k2..\n");
+	for(i=0; i<CSIZE; i++){
+		printf("key: 0x%x\t count: %d\n", keyspace[i], cand_cnt[i]);
+	}
 #endif	
 		
 #ifdef K1
