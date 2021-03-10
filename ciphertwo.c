@@ -13,11 +13,11 @@
 char bitXor(char x, char y);
 
 /* 
-	The following message/ciphertext pairs are given in the exercise,
-	all encrypted under the same key (k0,k1,k2,k3 four bits each).
+The following message/ciphertext pairs are given in the exercise,
+all encrypted under the same key (k0,k1,k2 four bits each).
 
-	The array have been sorted such that {msg[i], msg[i+1]} are pairs.
-	(Thus a total of 8 paris to work on).
+The array have been sorted such that {msg[i], msg[i+1]} are pairs.
+(Thus a total of 3 pairs to work on).
 */
 char msg[] 	= {0x0, 0xf, 0x3, 0xc, 0x2, 0xd};
 char cipher[] = {0xe, 0x9, 0x6, 0xa, 0x7, 0xb};
