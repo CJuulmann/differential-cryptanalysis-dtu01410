@@ -18,30 +18,29 @@ char R[] = {0x4, 0x8, 0x6, 0xa, 0x1, 0x3, 0x0, 0x5, 0xc, 0xe, 0xd, 0xf, 0x2, 0xb
 	The following message/ciphertext pairs are given in the exercise,
 	all encrypted under the same key (k0,k1,k2,k3 four bits each).
 
-	The array have been sorted such that { msg[i], msg[i+1] } are pairs.
+	The array have been sorted such that {msg[i], msg[i+1]} are pairs.
+	(Thus a total of 8 paris to work on).
 */
 char msg[] = {0x0, 0xf, 0x1, 0xe, 0x2, 0xd, 0x3, 0xc, 0x4, 0xb, 0x5, 0x9, 0x6, 0xa, 0x7, 0x8};
 char ciph[] = {0x1, 0x9, 0xd, 0x7, 0x8, 0xb, 0xa, 0x5, 0x4, 0xc, 0x3, 0xe, 0x0, 0x6, 0x2, 0xf};
 
-char cnt[16];
-char keys[16];
+// K = {k0, k1, k2, k3}
 char k0, k1, k2, k3;
 	
 int main(){
 	
-	//init
-	int i;
-	for(i=0; i<16; i++){
-	
-		keys[i] = i;
-		cnt[i] = 0;
-	}
-	
-	int t;
+	// Prepare set with all possible key candidates in keyspace
+	char keys[] = {0x0, 0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x8, 0x9, 0xa, 0xb, 0xc, 0xd, 0xe, 0xf};
+
+	// Use index as key candidate value and assign its respective count (initially 0)
+	char cnt[16];
+	memset(&cnt[0], 0, sizeof(char)*16);
+
+	int i, t;
 	char idx1, idx2;
 	
 #ifdef K3
-	puts("Guessing K3..");
+	puts("Guessing k3..");
 	for(t=0; t<16; t++){				// search keyspace of k3
 		for(i=0; i<=8; i+=2){			// search msg/cipher pairs for the given key value
 			idx1 = bitXor(t, ciph[i]);
@@ -60,7 +59,7 @@ int main(){
 	k3 = 0x6;		
 	char y[16];
 	int j;
-	puts("\nGuessing K2..");
+	puts("\nGuessing k2..");
 	for(j=0; j<16; j++){
 		// compute y part of the chain as the new cipher
 		y[j] = R[bitXor(k3, ciph[j])];		
@@ -84,7 +83,7 @@ int main(){
 		k2 = 0x3;	
 		char x[16];
 
-		puts("\nGuessing K1..");
+		puts("\nGuessing k1..");
 		// compute x part of the chain as the new cipher
 		for(j=0; j<16; j++){			
 			x[j] = bitXor(k2, y[j]);
@@ -106,7 +105,7 @@ int main(){
 			// choose based on max count
 			k1 = 0x4;			
 			
-			puts("\nSearch K0..");
+			puts("\nSearch k0..");
 			for(t=0; t<16; t++){
 				if(S[bitXor(S[bitXor(msg[0], t)], k1)] == x[0]){
 					k0 = t;
@@ -120,7 +119,7 @@ int main(){
 	return 0;
 }
 
-//bitwise XOR
+// Bitwise exclusive OR
 char bitXor(char x, char y) {
     char a = x & y;
     char b = ~x & ~y;
