@@ -14,4 +14,4 @@ Verify keys:
 
 #### Find k0,k1,k2,k3 using cipherthree.c
 
-From CipherThree we want to find 4 keys: k0,k1,k2,k3 - by starting from the end we guess k3, then k2 etc. Use the makefile to compile computation for k3 first (make ciph3-k3), then for k2 (make ciph3-k2) and so forth. Output is a table mapping all key values in the keyspace and their respective count - choose the key with highest count to find the next keypart.
+From CipherThree we want to find 1 key divided into 4 keyparts each of 4 bits: K={k0,k1,k2,k3} thus keyspace=2^4=16 - by starting from the end we guess k3, then k2 etc. Use the makefile to compile computation for k3 first (make ciph3-k3), then for k2 (make ciph3-k2) and so forth. Output is a table mapping all key values in the keyspace and their respective count - choose the key with highest count to find the next keypart.
